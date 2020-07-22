@@ -1,0 +1,46 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script language="Javascript" type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <style>
+        #example1 {
+            display: flex;
+            padding: 10px;
+            text-align: center;
+            justify-content: center;
+            height: 200px;
+        }
+
+        .inner-box {
+            box-shadow: 5px 10px 8px #888888;
+            border: 0px solid;
+            width: 30%;
+            background-color: #eaeaea7a;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="example1">
+        <div class="inner-box">
+        <form action="/upload_file" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <br><br>
+            <input style="margin-left: 21%;" type="file" name="excel_file" id="fileToUpload"><br>
+            <button onclick="uploader.uploadfile()" class="btn btn-primary btn-md">Upload</button>
+        </form>
+    </div>
+    </div>
+
+</body>
+
+</html>
