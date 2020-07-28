@@ -42,7 +42,8 @@ def uploadFile(request):
                 if str(data[_col][idx]) != 'nan':
                     continue
                 else:
-                    return HttpResponse("col_empty_error")
+                    err_msg = "in row " + idx + ", in column " + _col
+                    return HttpResponse("col_empty_error" + str(err_msg))
         #check for duplicate entries in columns
         for _col in _cols:
             temp_list = [str(data[_col][i]).strip() for i in data.index]
@@ -51,8 +52,8 @@ def uploadFile(request):
                 if temp_list.count(entry) == 1:
                     continue
                 else:
-                    print("duplicate entry in column '"+ str(_col) +"' at row", temp_list.index(entry)+1)
-                    return HttpResponse("duplicate_entry_error")
+                    err_msg = "duplicate entry in row '"+ str(temp_list.index(entry)+1) +"', in column", str(_col) 
+                    return HttpResponse("duplicate_entry_error: "+ str(err_msg))
         for index in (data.index):
             bfr_dump = []
             for _col in _cols:
