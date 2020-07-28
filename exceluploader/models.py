@@ -1,4 +1,5 @@
 from django.db import models
+from postgres_copy import CopyManager
 
 # Create your models here.
 
@@ -12,3 +13,4 @@ class ExcelData(models.Model):
     address = models.CharField(max_length=100)
     company = models.CharField(max_length=100)
     unit = models.CharField(max_length=100)
+    objects = CopyManager()

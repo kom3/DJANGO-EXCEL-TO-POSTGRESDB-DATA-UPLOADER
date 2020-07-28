@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -30,15 +31,36 @@
 </head>
 
 <body>
+    <div>
+        <input type="hidden" class="token" value='{{ csrf_token }}'>
+    </div>
     <div id="example1">
         <div class="inner-box">
-        <form action="/upload_file" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <br><br>
-            <input style="margin-left: 21%;" type="file" name="excel_file" id="fileToUpload"><br>
-            <button onclick="uploader.uploadfile()" class="btn btn-primary btn-md">Upload</button>
-        </form>
+            <h4>Upload excel to Database</h4>
+            <form action="/upload_file" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <br><br>
+                <input style="margin-left: 21%;" type="file" name="excel_file" id="fileToUpload"><br>
+                <button onclick="uploader.uploadfile()" class="btn btn-primary btn-md">Upload</button>
+            </form>
+        </div>
     </div>
+
+    <div id="example1">
+        <div class="inner-box">
+            <!-- <form action="/upload_file" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+           
+            <input style="margin-left: 21%;" type="file" name="excel_file" id="fileToUpload"><br> -->
+            <h4>Download excel from Database</h4>
+            <br><br>
+            <a href="download" download>
+                <button class="btn btn btn-warning"><i class="fa fa-download"></i> Download</button>
+            </a>
+
+            <!-- <button onclick="uploader.downloadfile()" class="btn btn-warning btn-md">Download</button> -->
+            <!-- </form> -->
+        </div>
     </div>
 
 </body>

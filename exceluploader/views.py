@@ -1,9 +1,12 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 import xlrd
 import pandas as pd
+import os
+import sys
+from django.shortcuts import render
+from django.http import HttpResponse
 from .models import ExcelData
 from .forms import ExceldataForm
+
 
 # Create your views here.
 
@@ -62,3 +65,12 @@ def uploadFile(request):
                 company = bfr_dump[7], unit= bfr_dump[8])
             _save.save()
         return HttpResponse("Success")
+
+def downloadfile(request):
+    data_from_db = ExcelData.objects.all()
+    file_path = os.path.join(os.path.dirname("__file__"), "exceluploader", "data_sheet.csv")
+    ExcelData.objects.to_csv(file_path)
+    with open(file_path, 'rb') as fl:
+        response = HttpResponse(fl.read(), content_type="application/vnd.ms-excel")
+        response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+        return response
