@@ -59,12 +59,14 @@ def uploadFile(request):
             for _col in _cols:
                 bfr_dump.append(data[_col][index])
             print(bfr_dump)
-            _save = ExcelData(name = bfr_dump[0],
-                contact = bfr_dump[1], email = bfr_dump[2],
-                age = bfr_dump[3], position = bfr_dump[4], 
-                domain = bfr_dump[5], address= bfr_dump[6], 
-                company = bfr_dump[7], unit= bfr_dump[8])
-            _save.save()
+            #check entry not there in db
+            if not ExcelData.objects.filter(name = bfr_dump[0]):
+                _save = ExcelData(name = bfr_dump[0],
+                    contact = bfr_dump[1], email = bfr_dump[2],
+                    age = bfr_dump[3], position = bfr_dump[4], 
+                    domain = bfr_dump[5], address= bfr_dump[6], 
+                    company = bfr_dump[7], unit= bfr_dump[8])
+                _save.save()
         return HttpResponse("Success")
 
 def downloadfile(request):
